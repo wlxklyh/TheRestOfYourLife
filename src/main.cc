@@ -26,6 +26,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "pdf.h"
+#include <iostream>
+#include <fstream>
 
 inline vec3 de_nan(const vec3& c) {
     vec3 temp = c;
@@ -90,10 +92,15 @@ void cornell_box(hitable **scene, camera **cam, float aspect) {
 }
 
 int main() {
+    int startTime = clock();
+    std::ofstream out;
+    out.open("OutputPic.ppm");
+
+
     int nx = 500;
     int ny = 500;
     int ns = 10;
-    std::cout << "P3\n" << nx << " " << ny << "\n255\n";
+    out << "P3\n" << nx << " " << ny << "\n255\n";
     hitable *world;
     camera *cam;
     float aspect = float(ny) / float(nx);
@@ -120,8 +127,50 @@ int main() {
             int ir = int(255.99*col[0]);
             int ig = int(255.99*col[1]);
             int ib = int(255.99*col[2]);
-            std::cout << ir << " " << ig << " " << ib << "\n";
+            out << ir << " " << ig << " " << ib << "\n";
         }
+        float costTime = (float)(clock() - startTime)/ (float) CLOCKS_PER_SEC / 60.0f;
+        float nowProgress = ((ny - j) * 1.0f) / (ny * 1.0f);
+        std::cout<<"Progress:"<< nowProgress * 100 << "% "
+                 << "Already cost:" << costTime << " minutes"
+                 << " Still need:" << costTime / nowProgress * (1-nowProgress)<< " minutes\n";
     }
+
+
+
+    // 打开结果图片
+#ifdef _WIN32
+    system(" start .\\OutputPic.ppm");
+    //define something for Windows (32-bit and 64-bit, this part is common)
+#ifdef _WIN64
+    //define something for Windows (64-bit only)
+#else
+    //define something for Windows (32-bit only)
+#endif
+#elif __APPLE__
+
+    #include "TargetConditionals.h"
+
+#if TARGET_IPHONE_SIMULATOR
+    // iOS Simulator
+#elif TARGET_OS_IPHONE
+    // iOS device
+#elif TARGET_OS_MAC
+    // Other kinds of Mac OS
+    FILE *pp = popen("open OutputPic.ppm", "r");
+#else
+#   error "Unknown Apple platform"
+#endif
+#elif __ANDROID__
+    // android
+#elif __linux__
+    // linux
+#elif __unix__ // all unices not caught above
+    // Unix
+#elif defined(_POSIX_VERSION)
+    // POSIX
+#else
+#   error "Unknown compiler"
+#endif
 }
 

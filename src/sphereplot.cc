@@ -11,9 +11,9 @@
 
 #include <iostream>
 #include <math.h>
+#include "msc.h"
 
-
-int main() {
+int main0004() {
     for (int i = 0; i < 2000; i++) {
         float r1 = drand48();
         float r2 = drand48();
@@ -22,5 +22,6 @@ int main() {
         float z = 1 - 2*r2;
         std::cout << x << " " << y << " " << z << "\n";
     }
+    return 0;
 }
 

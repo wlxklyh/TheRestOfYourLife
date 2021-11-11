@@ -11,9 +11,9 @@
 
 #include <iostream>
 #include <math.h>
+#include "msc.h"
 
-
-int main() {
+int main000() {
     int N = 1000000;
     float sum = 0.0;
     for (int i = 0; i < N; i++) {
@@ -26,5 +26,6 @@ int main() {
     }
     std::cout << "PI/2 = " << M_PI/2 << "\n";
     std::cout << "Estimate = " << sum/N << "\n";
+    return 0;
 }
 

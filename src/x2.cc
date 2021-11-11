@@ -12,8 +12,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
-
-int main() {
+#include "msc.h"
+int main0005() {
     int inside_circle = 0;
     int inside_circle_stratified = 0;
     int N = 1000000;
@@ -23,5 +23,6 @@ int main() {
             sum += x*x;
     }
     std::cout << "I =" << 2*sum/N << "\n";
+    return 0;
 }
 

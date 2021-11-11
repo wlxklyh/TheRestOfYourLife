@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "vec3.h"
-
+#include "msc.h"
 vec3 random_on_unit_sphere() {
     vec3 p;
     do {
@@ -28,7 +28,7 @@ inline float pdf(const vec3& p) {
     return  1 / (4*M_PI);
 }
 
-int main() {
+int main0003() {
     int N = 1000000;
     float sum;
     for (int i = 0; i < N; i++) {
@@ -37,5 +37,6 @@ int main() {
             sum += cosine_squared / pdf(d);
     }
     std::cout << "I =" << sum/N << "\n";
+    return 0;
 }
 

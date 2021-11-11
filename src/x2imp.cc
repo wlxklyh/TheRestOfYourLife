@@ -12,12 +12,12 @@
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
-
+#include "msc.h"
 inline float pdf(float x) {
     return  3*x*x/8;
 }
 
-int main() {
+int main0006() {
     int inside_circle = 0;
     int inside_circle_stratified = 0;
     int N = 1;
@@ -27,5 +27,6 @@ int main() {
             sum += x*x / pdf(x);
     }
     std::cout << "I =" << sum/N << "\n";
+    return 0;
 }
 

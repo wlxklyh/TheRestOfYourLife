@@ -135,7 +135,12 @@ int main() {
                  << "Already cost:" << costTime << " minutes"
                  << " Still need:" << costTime / nowProgress * (1-nowProgress)<< " minutes\n";
     }
+    std::ofstream outTime;
+    outTime.open("OutputTime.txt");
 
+    outTime << "Width:" << nx << " Height:" << ny << " Samples:" << ns << "\n";
+    outTime << float(clock() - startTime) / (float) CLOCKS_PER_SEC / 60.0f << " minutes\n";
+    out.close();
 
 
     // 打开结果图片
